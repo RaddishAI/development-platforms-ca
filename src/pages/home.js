@@ -1,47 +1,68 @@
 import { supabase } from "../lib/supabase.js";
+import { getCurrentUser, logout } from "../lib/auth.js";
 
 export async function renderHome() {
   const app = document.querySelector("#app");
+  const user = getCurrentUser();
 
   app.innerHTML = `
     <main style="padding: 16px;">
-      <h1>News Platform</h1>
-      <p id="status">Loading articles...</p>
-      <section id="articles"></section>
+      <nav style="margin-bottom: 12px;">
+        ${
+          user
+            ? `
+              <a href="#/create">Create article</a>
+              |
+              <button id="logout-btn">Logout</button>
+            `
+            : `
+              <a href="#/login">Login</a>
+              |
+              <a href="#/register">Register</a>
+            `
+        }
+      </nav>
+
+      <h1>News</h1>
+      <div id="articles"></div>
     </main>
   `;
 
-  const { data, error } = await supabase
+  if (user) {
+    document
+      .querySelector("#logout-btn")
+      ?.addEventListener("click", async () => {
+        await logout();
+        window.location.hash = "#/";
+      });
+  }
+
+  const { data: articles, error } = await supabase
     .from("articles")
-    .select("id,title,body,category,created_at,submitted_by")
+    .select("*")
     .order("created_at", { ascending: false });
 
-  const statusEl = document.querySelector("#status");
-  const listEl = document.querySelector("#articles");
-
   if (error) {
-    statusEl.textContent = "Failed to load articles.";
-    listEl.innerHTML = `<pre>${error.message}</pre>`;
+    console.error(error);
     return;
   }
 
-  if (!data || data.length === 0) {
-    statusEl.textContent = "No articles yet.";
+  const container = document.querySelector("#articles");
+
+  if (!articles.length) {
+    container.innerHTML = "<p>No articles yet.</p>";
     return;
   }
 
-  statusEl.textContent = "";
-
-  listEl.innerHTML = data
+  container.innerHTML = articles
     .map(
       (a) => `
-        <article style="border:1px solid #ddd; padding:12px; margin:12px 0;">
-          <h2 style="margin:0 0 8px;">${a.title}</h2>
-          <p style="margin:0 0 8px;">${a.body}</p>
-          <p style="margin:0; font-size: 14px;">
-            <strong>Category:</strong> ${a.category} —
-            <strong>Date:</strong> ${new Date(a.created_at).toLocaleString()}
-          </p>
+        <article style="margin-bottom: 12px;">
+          <h3>${a.title}</h3>
+          <small>${a.category} – ${new Date(
+        a.created_at
+      ).toLocaleString()}</small>
+          <p>${a.body}</p>
         </article>
       `
     )

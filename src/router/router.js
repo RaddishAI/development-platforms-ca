@@ -1,7 +1,13 @@
 import { renderHome } from "../pages/home.js";
+import { renderRegister } from "../pages/register.js";
+import { renderLogin } from "../pages/login.js";
+import { renderCreate } from "../pages/create.js";
 
 const routes = {
   "/": renderHome,
+  "/register": renderRegister,
+  "/login": renderLogin,
+  "/create": renderCreate,
 };
 
 function getPath() {
