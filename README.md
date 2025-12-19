@@ -24,7 +24,7 @@ Articles are linked to the submitting user, and access rules are enforced using 
 ## Live Demo 🚀
 
 👉 Hosted on Netlify  
-https://app.netlify.com/projects/julenews/overview
+https://julenews.netlify.app/
 
 ---
 
@@ -108,12 +108,20 @@ I chose **Option 2 (Supabase)** because I wanted hands-on experience with a back
 ## Requirements & Links 📌
 
 - GitHub Repository: https://github.com/RaddishAI/development-platforms-ca
-- Hosted Demo (Netlify): https://app.netlify.com/projects/julenews/overview
+- Hosted Demo (Netlify): https://julenews.netlify.app/
+
+---
+
+## Contact Me 📬
+
+- [LinkedIn](https://www.linkedin.com/in/petter-r%C3%B8nning-80602613a/)
+- [Email](mailto:petter.arbeid@gmail.com)
+- [Portfolio](https://your-portfolio-link.com/)
 
 ---
 
 ## Credits 🎉
 
-This project was built as part of the **Development Platforms** course assignment at Noroff.
-
-Built by me with assistance from AI tools for debugging, explanations, and learning support throughout the process.
+This project was built as part of the Development Platforms course assignment at Noroff.
+Built by me, with the help of **ChatGPT**,  
+which assisted with debugging, explanations, and learning support throughout the process.
