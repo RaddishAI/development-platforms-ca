@@ -13,7 +13,7 @@ export async function renderHome() {
             ? `
               <a href="#/create">Create article</a>
               |
-              <button id="logout-btn">Logout</button>
+              <button id="logout-btn" type="button">Logout</button>
             `
             : `
               <a href="#/login">Login</a>
@@ -55,16 +55,46 @@ export async function renderHome() {
   }
 
   container.innerHTML = articles
-    .map(
-      (a) => `
+    .map((a) => {
+      const canDelete = user && a.submitted_by === user.id;
+
+      return `
         <article style="margin-bottom: 12px;">
           <h3>${a.title}</h3>
           <small>${a.category} – ${new Date(
         a.created_at
       ).toLocaleString()}</small>
           <p>${a.body}</p>
+
+          ${
+            canDelete
+              ? `<button class="delete-article-btn" data-id="${a.id}" type="button">Delete</button>`
+              : ""
+          }
         </article>
-      `
-    )
+      `;
+    })
     .join("");
+
+  container.querySelectorAll(".delete-article-btn").forEach((btn) => {
+    btn.addEventListener("click", async (e) => {
+      const id = e.currentTarget.dataset.id;
+
+      const ok = window.confirm("Delete this article?");
+      if (!ok) return;
+
+      const { error: deleteError } = await supabase
+        .from("articles")
+        .delete()
+        .eq("id", id);
+
+      if (deleteError) {
+        console.error(deleteError);
+        alert(deleteError.message);
+        return;
+      }
+
+      renderHome();
+    });
+  });
 }

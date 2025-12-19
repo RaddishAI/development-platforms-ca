@@ -1,4 +1,4 @@
-import "./styles/main.css";
+import "./style.css";
 import { startRouter } from "./router/router.js";
 import { initAuth } from "./lib/auth.js";
 
