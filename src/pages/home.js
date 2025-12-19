@@ -33,7 +33,7 @@ export async function renderHome() {
       .querySelector("#logout-btn")
       ?.addEventListener("click", async () => {
         await logout();
-        window.location.hash = "#/";
+        await renderHome();
       });
   }
 

@@ -10,7 +10,6 @@
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -19,8 +18,9 @@
   box-sizing: border-box;
 }
 
+/* Links */
 a {
-  font-weight: 600;
+  font-weight: 700;
   color: #646cff;
   text-decoration: none;
 }
@@ -28,6 +28,7 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Base layout */
 body {
   margin: 0;
   min-width: 320px;
@@ -42,6 +43,7 @@ body {
   text-align: left;
 }
 
+/* Typography */
 h1 {
   font-size: 2rem;
   line-height: 1.2;
@@ -62,26 +64,11 @@ small {
   opacity: 0.8;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* Forms */
+label {
+  display: block;
   font-weight: 600;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s, transform 0.05s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:active {
-  transform: translateY(1px);
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  margin: 0.75rem 0 0.25rem;
 }
 
 input,
@@ -94,24 +81,55 @@ textarea {
   background: rgba(0, 0, 0, 0.15);
   color: inherit;
 }
+
 textarea {
   resize: vertical;
   min-height: 140px;
 }
 
-label {
-  display: block;
+/* Buttons */
+button {
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
   font-weight: 600;
-  margin: 0.75rem 0 0.25rem;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.05s;
 }
 
-/* Simple layout helpers */
+button:hover {
+  border-color: #646cff;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 3px solid;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Nav (main menu) */
 nav {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
   align-items: center;
   margin-bottom: 1rem;
+
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.12);
 }
 
 nav a,
@@ -119,8 +137,22 @@ nav button {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
 }
 
+nav a:hover,
+nav button:hover {
+  border-color: rgba(100, 108, 255, 0.7);
+}
+
+nav a:focus-visible,
+nav button:focus-visible {
+  outline: 3px solid;
+  outline-offset: 2px;
+}
+
+/* Articles list */
 #articles {
   display: grid;
   gap: 0.75rem;
@@ -143,8 +175,14 @@ article small {
   margin-bottom: 0.5rem;
 }
 
+/* Delete (danger) button */
 .delete-article-btn {
   margin-top: 0.75rem;
+  border-color: rgba(255, 90, 90, 0.6);
+}
+
+.delete-article-btn:hover {
+  border-color: rgba(255, 90, 90, 1);
 }
 
 /* Desktop enhancements */
@@ -182,5 +220,10 @@ article small {
   article {
     border: 1px solid rgba(0, 0, 0, 0.12);
     background: rgba(0, 0, 0, 0.03);
+  }
+
+  nav {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.12);
   }
 }
